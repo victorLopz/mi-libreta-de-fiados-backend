@@ -9,20 +9,28 @@ import {
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column({ length: 120 }) name: string;
+  @Column('varchar', { length: 120 })
+  name!: string;
 
-  @Column({ length: 160, unique: true, nullable: true }) email: string | null;
+  // 👈 Tipo explícito 'varchar' y propiedad opcional (sin union)
+  @Column('varchar', { length: 160, unique: true, nullable: true })
+  email?: string;
 
-  @Column() password_hash: string;
+  @Column('varchar', { length: 255 })
+  password_hash!: string;
 
-  // hash del refresh token almacenado (rotación)
-  @Column({ nullable: true }) refresh_token_hash?: string | null;
+  @Column('varchar', { length: 255, nullable: true })
+  refresh_token_hash?: string | null;
 
-  // para invalidar todos los refresh a la vez (revocación global)
-  @Column({ type: 'int', default: 0 }) token_version: number;
+  @Column('int', { default: 0 })
+  token_version!: number;
 
-  @CreateDateColumn() created_at: Date;
-  @UpdateDateColumn() updated_at: Date;
+  @CreateDateColumn()
+  created_at!: Date;
+
+  @UpdateDateColumn()
+  updated_at!: Date;
 }
