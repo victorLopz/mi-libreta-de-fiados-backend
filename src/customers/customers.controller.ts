@@ -7,16 +7,20 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { QueryCustomerDto } from './dto/query-customer.dto';
+import { BypassOrJwtGuard } from 'src/common/guards/bypass-or-jwt.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @ApiTags('customers')
 @ApiBearerAuth()
 @Controller('customers')
+@UseGuards(BypassOrJwtGuard, RolesGuard)
 export class CustomersController {
   constructor(private readonly service: CustomersService) {}
 

@@ -5,6 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Customer } from './entities/customer.entity';
+import { BypassOrJwtGuard } from 'src/common/guards/bypass-or-jwt.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @Module({
   imports: [
@@ -12,7 +14,7 @@ import { Customer } from './entities/customer.entity';
     PassportModule,
     JwtModule.register({}), // firmamos manualmente en el service
   ],
-  providers: [CustomersService],
+  providers: [CustomersService, BypassOrJwtGuard, RolesGuard],
   controllers: [CustomersController],
 })
 export class CustomersModule {}
