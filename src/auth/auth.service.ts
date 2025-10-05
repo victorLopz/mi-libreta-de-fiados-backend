@@ -33,7 +33,7 @@ export class AuthService {
       }),
       this.jwt.signAsync(payload, {
         secret: process.env.JWT_REFRESH_SECRET,
-        expiresIn: process.env.JWT_REFRESH_EXPIRES || '7d',
+        expiresIn: process.env.JWT_REFRESH_EXPIRES || '1d',
       }),
     ]);
     return { access_token, refresh_token };
