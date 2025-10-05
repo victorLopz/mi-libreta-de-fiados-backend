@@ -11,14 +11,14 @@ export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 160 })
-  full_name: string;
+  @Column({ length: 160, name: 'full_name' })
+  fullName: string;
 
   @Column({ nullable: true, length: 30 })
   phone?: string;
 
-  @Column({ nullable: true, length: 50 })
-  doc_id?: string;
+  @Column({ nullable: true, length: 50, name: 'doc_id' })
+  docId?: string;
 
   @Column({ nullable: true, length: 255 })
   address?: string;
@@ -29,9 +29,9 @@ export class Customer {
   @Column({ type: 'enum', enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' })
   status: 'ACTIVE' | 'INACTIVE';
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }
